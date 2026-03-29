@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BowlerStats | IPL Bowler Run Analysis - Over by Over Cricket Stats</title>
+  <meta name="description" content="BowlerStats tracks IPL bowler performance over-by-over. See exactly how many runs each bowler conceded per over with wicket markers. The only cricket site focused on bowler economy." />
+  <meta name="keywords" content="IPL bowler stats, cricket bowler economy, over by over analysis, IPL 2025, bowler runs conceded, cricket statistics" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://bowlerstats.vercel.app/" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="BowlerStats | IPL Bowler Run Analysis" />
+  <meta property="og:description" content="The only cricket site that tracks bowler run concession over-by-over with stunning visual histograms." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://bowlerstats.vercel.app/" />
+  <meta property="og:image" content="https://bowlerstats.vercel.app/og-image.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="BowlerStats | IPL Bowler Analysis" />
+  <meta name="twitter:description" content="Over-by-over bowler run analysis for every IPL match." />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "BowlerStats",
+    "url": "https://bowlerstats.vercel.app",
+    "description": "IPL cricket bowler statistics - over by over run analysis",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://bowlerstats.vercel.app/pages/matches.html?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Google AdSense placeholder - replace with your real publisher ID -->
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX" crossorigin="anonymous"></script> -->
+</head>
+<body>
+
+<!-- ===== HEADER / NAV ===== -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo">BOWLER<span>STATS</span></a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html" class="active">Analysis</a>
+      <a href="pages/matches.html">Matches</a>
+      <a href="pages/about.html">About</a>
+      <a href="pages/contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== HERO / TODAY MATCH ===== -->
+<main>
+<section class="hero-section" id="heroSection">
+  <div class="container">
+    <div class="match-badge" id="tournamentBadge">IPL 2025</div>
+    <h1 class="match-title" id="matchTitle">Loading...</h1>
+    <div class="match-meta" id="matchMeta">
+      <span id="venueText"></span>
+      <span id="dateText"></span>
+    </div>
+    <div class="status-badge" id="statusBadge"></div>
+  </div>
+</section>
+
+<!-- ===== AD BANNER TOP ===== -->
+<section class="ad-zone container">
+  <!-- Google AdSense Banner 728x90 / responsive -->
+  <div class="ad-placeholder">
+    Advertisement
+    <!-- 
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-XXXXXXXXXX"
+         data-ad-slot="XXXXXXXXXX"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    -->
+  </div>
+</section>
+
+<!-- ===== MATCH SUMMARY STATS ===== -->
+<section class="container stats-overview" id="statsOverview" style="display:none">
+  <div class="stat-card"><span class="stat-num" id="statTotalRuns">-</span><span class="stat-label">Total Runs</span></div>
+  <div class="stat-card"><span class="stat-num" id="statWickets">-</span><span class="stat-label">Wickets</span></div>
+  <div class="stat-card"><span class="stat-num" id="statAvgEcon">-</span><span class="stat-label">Avg Economy</span></div>
+  <div class="stat-card highlight"><span class="stat-num" id="statWorstOver">-</span><span class="stat-label">Worst Over</span></div>
+</section>
+
+<!-- ===== HISTOGRAM SECTION ===== -->
+<section class="container chart-section" id="chartSection" style="display:none">
+
+  <!-- Team 1 Bowling -->
+  <div class="team-chart-block">
+    <div class="team-chart-header">
+      <h2 id="team1Label">Team 1 Bowling</h2>
+      <span class="chart-sub">Runs conceded per over</span>
+    </div>
+    <div class="histogram-wrapper">
+      <div class="y-axis" id="yAxis1"></div>
+      <div class="histogram-area">
+        <div class="bars-container" id="bars1"></div>
+        <div class="x-labels" id="xLabels1"></div>
+      </div>
+    </div>
+    <div class="bowler-legend" id="legend1"></div>
+  </div>
+
+  <!-- Ad between histograms -->
+  <div class="ad-zone">
+    <div class="ad-placeholder ad-small">Advertisement</div>
+  </div>
+
+  <!-- Team 2 Bowling -->
+  <div class="team-chart-block">
+    <div class="team-chart-header">
+      <h2 id="team2Label">Team 2 Bowling</h2>
+      <span class="chart-sub">Runs conceded per over</span>
+    </div>
+    <div class="histogram-wrapper">
+      <div class="y-axis" id="yAxis2"></div>
+      <div class="histogram-area">
+        <div class="bars-container" id="bars2"></div>
+        <div class="x-labels" id="xLabels2"></div>
+      </div>
+    </div>
+    <div class="bowler-legend" id="legend2"></div>
+  </div>
+
+</section>
+
+<!-- ===== MATCH DESCRIPTION ===== -->
+<section class="container match-description" id="matchDescSection" style="display:none">
+  <h2>Match Overview</h2>
+  <p id="matchDescription"></p>
+  <div class="result-tag" id="resultTag"></div>
+</section>
+
+<!-- ===== PREVIOUS MATCHES ===== -->
+<section class="container previous-section">
+  <h2 class="section-title">Previous Matches</h2>
+  <div class="matches-grid" id="previousMatchesGrid">
+    <p class="loading-text">Loading previous matches...</p>
+  </div>
+</section>
+
+<!-- ===== AD BOTTOM ===== -->
+<section class="ad-zone container">
+  <div class="ad-placeholder">Advertisement</div>
+</section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <a href="index.html" class="logo">BOWLER<span>STATS</span></a>
+      <p>The only cricket site focused on bowlers. Over-by-over run analysis for every IPL match.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Pages</h4>
+      <a href="pages/matches.html">All Matches</a>
+      <a href="pages/about.html">About Us</a>
+      <a href="pages/contact.html">Contact</a>
+      <a href="pages/privacy.html">Privacy Policy</a>
+    </div>
+    <div class="footer-links">
+      <h4>Follow</h4>
+      <a href="#">Twitter / X</a>
+      <a href="#">Instagram</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 BowlerStats. For cricket fans who love bowler analysis.</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

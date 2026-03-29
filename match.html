@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Match Analysis | BowlerStats</title>
+  <meta name="description" content="Detailed bowler over-by-over run analysis for this IPL match." />
+  <meta name="robots" content="index, follow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="../index.html" class="logo">BOWLER<span>STATS</span></a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+    <nav class="main-nav" id="mainNav">
+      <a href="../index.html">Analysis</a>
+      <a href="matches.html">Matches</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="hero-section" id="heroSection">
+  <div class="container">
+    <div class="match-badge" id="tournamentBadge">IPL 2025</div>
+    <h1 class="match-title" id="matchTitle">Loading...</h1>
+    <div class="match-meta" id="matchMeta">
+      <span id="venueText"></span>
+      <span id="dateText"></span>
+    </div>
+    <div class="status-badge" id="statusBadge"></div>
+  </div>
+</section>
+
+<section class="ad-zone container">
+  <div class="ad-placeholder">Advertisement</div>
+</section>
+
+<section class="container stats-overview" id="statsOverview" style="display:none">
+  <div class="stat-card"><span class="stat-num" id="statTotalRuns">-</span><span class="stat-label">Total Runs</span></div>
+  <div class="stat-card"><span class="stat-num" id="statWickets">-</span><span class="stat-label">Wickets</span></div>
+  <div class="stat-card"><span class="stat-num" id="statAvgEcon">-</span><span class="stat-label">Avg Economy</span></div>
+  <div class="stat-card highlight"><span class="stat-num" id="statWorstOver">-</span><span class="stat-label">Worst Over</span></div>
+</section>
+
+<section class="container chart-section" id="chartSection" style="display:none">
+  <div class="team-chart-block">
+    <div class="team-chart-header">
+      <h2 id="team1Label">Team 1 Bowling</h2>
+      <span class="chart-sub">Runs conceded per over</span>
+    </div>
+    <div class="histogram-wrapper">
+      <div class="y-axis" id="yAxis1"></div>
+      <div class="histogram-area">
+        <div class="bars-container" id="bars1"></div>
+        <div class="x-labels" id="xLabels1"></div>
+      </div>
+    </div>
+    <div class="bowler-legend" id="legend1"></div>
+  </div>
+
+  <div class="ad-zone">
+    <div class="ad-placeholder ad-small">Advertisement</div>
+  </div>
+
+  <div class="team-chart-block">
+    <div class="team-chart-header">
+      <h2 id="team2Label">Team 2 Bowling</h2>
+      <span class="chart-sub">Runs conceded per over</span>
+    </div>
+    <div class="histogram-wrapper">
+      <div class="y-axis" id="yAxis2"></div>
+      <div class="histogram-area">
+        <div class="bars-container" id="bars2"></div>
+        <div class="x-labels" id="xLabels2"></div>
+      </div>
+    </div>
+    <div class="bowler-legend" id="legend2"></div>
+  </div>
+</section>
+
+<section class="container match-description" id="matchDescSection" style="display:none">
+  <h2>Match Overview</h2>
+  <p id="matchDescription"></p>
+  <div class="result-tag" id="resultTag"></div>
+</section>
+
+<section class="ad-zone container">
+  <div class="ad-placeholder">Advertisement</div>
+</section>
+
+<div class="container" style="padding:16px 16px 40px">
+  <a href="matches.html" style="color:var(--text-muted);font-size:0.85rem">← Back to all matches</a>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <a href="../index.html" class="logo">BOWLER<span>STATS</span></a>
+      <p>The only cricket site focused on bowlers. Over-by-over run analysis for every IPL match.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Pages</h4>
+      <a href="matches.html">All Matches</a>
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy Policy</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 BowlerStats. For cricket fans who love bowler analysis.</p>
+  </div>
+</footer>
+
+<script>
+// Reuse the same rendering logic (inline for this page)
+const BOWLER_COLORS = [
+  '#f5a623','#22d3ee','#a78bfa','#34d399','#fb7185',
+  '#fbbf24','#60a5fa','#f472b6','#4ade80','#c084fc'
+];
+
+function formatDate(ds) {
+  return new Date(ds).toLocaleDateString('en-IN', { weekday:'short', year:'numeric', month:'short', day:'numeric' });
+}
+
+function buildColorMap(overs) {
+  const map = {}; let idx = 0;
+  overs.forEach(o => { if (!map[o.bowler]) { map[o.bowler] = BOWLER_COLORS[idx++ % BOWLER_COLORS.length]; } });
+  return map;
+}
+
+function computeStats(overs) {
+  const totalRuns = overs.reduce((s,o) => s+o.runs, 0);
+  const totalWickets = overs.reduce((s,o) => s+o.wickets, 0);
+  const avgEcon = overs.length ? (totalRuns/overs.length).toFixed(1) : '0';
+  const worstOver = overs.reduce((b,o) => o.runs>b.runs?o:b, overs[0]||{runs:0,over:'-'});
+  return { totalRuns, totalWickets, avgEcon, worstOver };
+}
+
+function renderYAxis(maxRuns, id) {
+  const c = document.getElementById(id); if (!c) return; c.innerHTML = '';
+  [0, Math.round(maxRuns*0.33), Math.round(maxRuns*0.67), maxRuns].reverse().forEach(v => {
+    const l = document.createElement('div'); l.className='y-label'; l.textContent=v; c.appendChild(l);
+  });
+}
+
+function renderBars(overs, colorMap, barsId, xlId) {
+  const bc = document.getElementById(barsId); const xl = document.getElementById(xlId);
+  if (!bc || !xl) return; bc.innerHTML=''; xl.innerHTML='';
+  const maxRuns = Math.max(...overs.map(o=>o.runs),1);
+  let tip = document.getElementById('barTooltip');
+  if (!tip) { tip = document.createElement('div'); tip.className='bar-tooltip'; tip.id='barTooltip'; document.body.appendChild(tip); }
+
+  overs.forEach(over => {
+    const hp = (over.runs/maxRuns)*100;
+    const color = colorMap[over.bowler]||BOWLER_COLORS[0];
+    const wrap = document.createElement('div'); wrap.className='bar-wrap';
+    if (over.wickets>0) {
+      const b = document.createElement('div'); b.className='wicket-badge';
+      b.textContent=`W${over.wickets>1?over.wickets:''}`; wrap.appendChild(b);
+    }
+    const v = document.createElement('div'); v.className='bar-value'; v.textContent=over.runs; wrap.appendChild(v);
+    const bar = document.createElement('div'); bar.className='bar';
+    bar.style.height=hp+'%';
+    bar.style.background=`linear-gradient(180deg,${color} 0%,${color}88 100%)`;
+    bar.style.boxShadow=`0 0 8px ${color}44`;
+    wrap.appendChild(bar);
+    wrap.addEventListener('mousemove', e => {
+      tip.innerHTML=`<strong>Over ${over.over}</strong><br>Bowler: ${over.bowler}<br>Runs: <span style="color:${color};font-weight:700">${over.runs}</span>${over.wickets>0?`<br>Wickets: <span style="color:#e03e3e;font-weight:700">${over.wickets}</span>`:''}`;
+      tip.style.display='block'; tip.style.left=(e.clientX+12)+'px'; tip.style.top=(e.clientY-40)+'px';
+    });
+    wrap.addEventListener('mouseleave', () => tip.style.display='none');
+    wrap.addEventListener('touchstart', e => {
+      const t=e.touches[0];
+      tip.innerHTML=`<strong>Over ${over.over}</strong> | ${over.bowler}<br>Runs: ${over.runs}${over.wickets>0?` | W${over.wickets}`:''}`;
+      tip.style.display='block'; tip.style.left=(t.clientX+12)+'px'; tip.style.top=(t.clientY-60)+'px';
+      setTimeout(()=>tip.style.display='none',2500);
+    },{passive:true});
+    bc.appendChild(wrap);
+    const x = document.createElement('div'); x.className='x-label'; x.textContent=over.over; xl.appendChild(x);
+  });
+}
+
+function renderLegend(colorMap, id) {
+  const c = document.getElementById(id); if (!c) return; c.innerHTML='';
+  Object.entries(colorMap).forEach(([b,col]) => {
+    const i = document.createElement('div'); i.className='legend-item';
+    i.innerHTML=`<span class="legend-dot" style="background:${col}"></span>${b}`; c.appendChild(i);
+  });
+}
+
+async function loadMatch() {
+  const params = new URLSearchParams(window.location.search);
+  const matchId = params.get('id');
+  if (!matchId) { document.getElementById('matchTitle').textContent='Match Not Found'; return; }
+
+  try {
+    const res = await fetch(`../data/matches/${matchId}.json`);
+    if (!res.ok) throw new Error();
+    const match = await res.json();
+
+    document.title = `${match.team1} vs ${match.team2} Bowler Analysis | BowlerStats`;
+    document.getElementById('tournamentBadge').textContent = match.tournament;
+    document.getElementById('matchTitle').textContent = `${match.team1} VS ${match.team2}`;
+    document.getElementById('venueText').textContent = match.venue;
+    document.getElementById('dateText').textContent = formatDate(match.date);
+
+    const sb = document.getElementById('statusBadge');
+    if (match.status==='live') { sb.textContent='🔴 LIVE'; sb.className='status-badge status-live'; }
+    else { sb.textContent = match.result||'Completed'; sb.className='status-badge status-completed'; }
+
+    const allOvers = [...match.team1Bowling.overs, ...match.team2Bowling.overs];
+    const s1 = computeStats(match.team1Bowling.overs);
+    const s2 = computeStats(match.team2Bowling.overs);
+    const worst = allOvers.reduce((b,o)=>o.runs>b.runs?o:b, allOvers[0]);
+
+    document.getElementById('statTotalRuns').textContent = s1.totalRuns+s2.totalRuns;
+    document.getElementById('statWickets').textContent = s1.totalWickets+s2.totalWickets;
+    document.getElementById('statAvgEcon').textContent = ((s1.totalRuns/20+s2.totalRuns/20)/2).toFixed(1);
+    document.getElementById('statWorstOver').textContent = `${worst.runs} (O${worst.over})`;
+    document.getElementById('statsOverview').style.display='grid';
+
+    const cm1 = buildColorMap(match.team1Bowling.overs);
+    const cm2 = buildColorMap(match.team2Bowling.overs);
+    const mx1 = Math.max(...match.team1Bowling.overs.map(o=>o.runs));
+    const mx2 = Math.max(...match.team2Bowling.overs.map(o=>o.runs));
+
+    document.getElementById('team1Label').textContent = match.team1Bowling.label;
+    document.getElementById('team2Label').textContent = match.team2Bowling.label;
+
+    renderYAxis(mx1,'yAxis1'); renderBars(match.team1Bowling.overs,cm1,'bars1','xLabels1'); renderLegend(cm1,'legend1');
+    renderYAxis(mx2,'yAxis2'); renderBars(match.team2Bowling.overs,cm2,'bars2','xLabels2'); renderLegend(cm2,'legend2');
+
+    document.getElementById('chartSection').style.display='flex';
+    document.getElementById('matchDescription').textContent = match.description||'';
+    if (match.result) document.getElementById('resultTag').textContent='🏆 '+match.result;
+    else document.getElementById('resultTag').style.display='none';
+    document.getElementById('matchDescSection').style.display='block';
+
+  } catch(e) {
+    document.getElementById('matchTitle').textContent='Match Not Found';
+  }
+}
+
+document.getElementById('menuToggle')?.addEventListener('click', () => {
+  document.getElementById('mainNav').classList.toggle('open');
+});
+
+loadMatch();
+</script>
+</body>
+</html>

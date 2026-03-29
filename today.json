@@ -1,0 +1,63 @@
+{
+  "matchId": "ipl-2025-rcb-vs-mi-apr15",
+  "team1": "RCB",
+  "team2": "MI",
+  "venue": "M. Chinnaswamy Stadium, Bangalore",
+  "date": "2025-04-15",
+  "tournament": "IPL 2025",
+  "status": "live",
+  "result": "",
+  "description": "RCB bowled with great discipline at home, keeping MI in check throughout the innings.",
+  "team1Bowling": {
+    "teamName": "RCB",
+    "label": "RCB Bowling vs MI",
+    "overs": [
+      { "over": 1, "runs": 8, "wickets": 0, "bowler": "Siraj" },
+      { "over": 2, "runs": 6, "wickets": 0, "bowler": "Siraj" },
+      { "over": 3, "runs": 10, "wickets": 1, "bowler": "Hazlewood" },
+      { "over": 4, "runs": 7, "wickets": 0, "bowler": "Yash Dayal" },
+      { "over": 5, "runs": 5, "wickets": 1, "bowler": "Hazlewood" },
+      { "over": 6, "runs": 9, "wickets": 0, "bowler": "Swapnil" },
+      { "over": 7, "runs": 8, "wickets": 0, "bowler": "Siraj" },
+      { "over": 8, "runs": 12, "wickets": 0, "bowler": "Krunal" },
+      { "over": 9, "runs": 7, "wickets": 1, "bowler": "Hazlewood" },
+      { "over": 10, "runs": 6, "wickets": 0, "bowler": "Yash Dayal" },
+      { "over": 11, "runs": 9, "wickets": 0, "bowler": "Swapnil" },
+      { "over": 12, "runs": 8, "wickets": 0, "bowler": "Krunal" },
+      { "over": 13, "runs": 7, "wickets": 1, "bowler": "Siraj" },
+      { "over": 14, "runs": 11, "wickets": 0, "bowler": "Yash Dayal" },
+      { "over": 15, "runs": 6, "wickets": 0, "bowler": "Hazlewood" },
+      { "over": 16, "runs": 9, "wickets": 0, "bowler": "Krunal" },
+      { "over": 17, "runs": 8, "wickets": 0, "bowler": "Swapnil" },
+      { "over": 18, "runs": 10, "wickets": 0, "bowler": "Siraj" },
+      { "over": 19, "runs": 13, "wickets": 0, "bowler": "Yash Dayal" },
+      { "over": 20, "runs": 12, "wickets": 0, "bowler": "Hazlewood" }
+    ]
+  },
+  "team2Bowling": {
+    "teamName": "MI",
+    "label": "MI Bowling vs RCB",
+    "overs": [
+      { "over": 1, "runs": 7, "wickets": 1, "bowler": "Bumrah" },
+      { "over": 2, "runs": 9, "wickets": 0, "bowler": "Hardik" },
+      { "over": 3, "runs": 6, "wickets": 0, "bowler": "Bumrah" },
+      { "over": 4, "runs": 11, "wickets": 0, "bowler": "Boult" },
+      { "over": 5, "runs": 5, "wickets": 1, "bowler": "Bumrah" },
+      { "over": 6, "runs": 8, "wickets": 0, "bowler": "Hardik" },
+      { "over": 7, "runs": 10, "wickets": 0, "bowler": "Boult" },
+      { "over": 8, "runs": 7, "wickets": 1, "bowler": "Bumrah" },
+      { "over": 9, "runs": 9, "wickets": 0, "bowler": "Krunal" },
+      { "over": 10, "runs": 12, "wickets": 0, "bowler": "Hardik" },
+      { "over": 11, "runs": 6, "wickets": 0, "bowler": "Boult" },
+      { "over": 12, "runs": 8, "wickets": 1, "bowler": "Bumrah" },
+      { "over": 13, "runs": 10, "wickets": 0, "bowler": "Hardik" },
+      { "over": 14, "runs": 7, "wickets": 0, "bowler": "Boult" },
+      { "over": 15, "runs": 11, "wickets": 0, "bowler": "Krunal" },
+      { "over": 16, "runs": 9, "wickets": 0, "bowler": "Hardik" },
+      { "over": 17, "runs": 6, "wickets": 1, "bowler": "Bumrah" },
+      { "over": 18, "runs": 13, "wickets": 0, "bowler": "Boult" },
+      { "over": 19, "runs": 8, "wickets": 0, "bowler": "Hardik" },
+      { "over": 20, "runs": 11, "wickets": 0, "bowler": "Krunal" }
+    ]
+  }
+}

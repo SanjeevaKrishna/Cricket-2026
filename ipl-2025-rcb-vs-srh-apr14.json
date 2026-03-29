@@ -1,0 +1,63 @@
+{
+  "matchId": "ipl-2025-rcb-vs-srh-apr14",
+  "team1": "RCB",
+  "team2": "SRH",
+  "venue": "M. Chinnaswamy Stadium, Bangalore",
+  "date": "2025-04-14",
+  "tournament": "IPL 2025",
+  "status": "completed",
+  "result": "SRH Won",
+  "description": "RCB bowled very well restricting SRH but SRH managed to chase down the target. SRH made it in the end.",
+  "team1Bowling": {
+    "teamName": "RCB",
+    "label": "RCB Bowling vs SRH",
+    "overs": [
+      { "over": 1, "runs": 12, "wickets": 0, "bowler": "Krunal" },
+      { "over": 2, "runs": 12, "wickets": 0, "bowler": "Bhuvneshwar" },
+      { "over": 3, "runs": 8, "wickets": 0, "bowler": "Bhuvneshwar" },
+      { "over": 4, "runs": 15, "wickets": 0, "bowler": "Hazlewood" },
+      { "over": 5, "runs": 19, "wickets": 1, "bowler": "Hazlewood" },
+      { "over": 6, "runs": 9, "wickets": 0, "bowler": "Vicky" },
+      { "over": 7, "runs": 7, "wickets": 0, "bowler": "Swapnil" },
+      { "over": 8, "runs": 13, "wickets": 1, "bowler": "Swapnil" },
+      { "over": 9, "runs": 13, "wickets": 0, "bowler": "Shivam" },
+      { "over": 10, "runs": 10, "wickets": 0, "bowler": "Hazlewood" },
+      { "over": 11, "runs": 13, "wickets": 1, "bowler": "Krunal" },
+      { "over": 12, "runs": 8, "wickets": 0, "bowler": "Vicky" },
+      { "over": 13, "runs": 13, "wickets": 0, "bowler": "Swapnil" },
+      { "over": 14, "runs": 8, "wickets": 0, "bowler": "Bhuvneshwar" },
+      { "over": 15, "runs": 13, "wickets": 0, "bowler": "Shivam" },
+      { "over": 16, "runs": 9, "wickets": 0, "bowler": "Vicky" },
+      { "over": 17, "runs": 13, "wickets": 1, "bowler": "Hazlewood" },
+      { "over": 18, "runs": 9, "wickets": 0, "bowler": "Krunal" },
+      { "over": 19, "runs": 14, "wickets": 1, "bowler": "Bhuvneshwar" },
+      { "over": 20, "runs": 10, "wickets": 0, "bowler": "Shivam" }
+    ]
+  },
+  "team2Bowling": {
+    "teamName": "SRH",
+    "label": "SRH Bowling vs RCB",
+    "overs": [
+      { "over": 1, "runs": 14, "wickets": 0, "bowler": "Patchy" },
+      { "over": 2, "runs": 16, "wickets": 0, "bowler": "Jaydev" },
+      { "over": 3, "runs": 16, "wickets": 0, "bowler": "Harshit" },
+      { "over": 4, "runs": 8, "wickets": 1, "bowler": "Harshit" },
+      { "over": 5, "runs": 9, "wickets": 0, "bowler": "Patchy" },
+      { "over": 6, "runs": 9, "wickets": 1, "bowler": "Jaydev" },
+      { "over": 7, "runs": 8, "wickets": 1, "bowler": "Patchy" },
+      { "over": 8, "runs": 6, "wickets": 0, "bowler": "Harshit" },
+      { "over": 9, "runs": 8, "wickets": 0, "bowler": "Jaydev" },
+      { "over": 10, "runs": 6, "wickets": 0, "bowler": "Patchy" },
+      { "over": 11, "runs": 6, "wickets": 0, "bowler": "Harshit" },
+      { "over": 12, "runs": 6, "wickets": 0, "bowler": "Jaydev" },
+      { "over": 13, "runs": 14, "wickets": 1, "bowler": "Patchy" },
+      { "over": 14, "runs": 8, "wickets": 0, "bowler": "Harshit" },
+      { "over": 15, "runs": 8, "wickets": 0, "bowler": "Jaydev" },
+      { "over": 16, "runs": 8, "wickets": 0, "bowler": "Patchy" },
+      { "over": 17, "runs": 14, "wickets": 1, "bowler": "Harshit" },
+      { "over": 18, "runs": 10, "wickets": 1, "bowler": "Jaydev" },
+      { "over": 19, "runs": 12, "wickets": 0, "bowler": "Patchy" },
+      { "over": 20, "runs": 8, "wickets": 0, "bowler": "Harshit" }
+    ]
+  }
+}

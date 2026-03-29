@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All Matches | BowlerStats - IPL Bowler Analysis</title>
+  <meta name="description" content="Browse all IPL 2025 match bowler analyses on BowlerStats. Over-by-over run charts for every game." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://bowlerstats.vercel.app/pages/matches.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="../index.html" class="logo">BOWLER<span>STATS</span></a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+    <nav class="main-nav" id="mainNav">
+      <a href="../index.html">Analysis</a>
+      <a href="matches.html" class="active">Matches</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="page-header">
+  <div class="container">
+    <h1>All Matches</h1>
+    <p>Every IPL match bowler analysis — over-by-over runs conceded charts</p>
+  </div>
+</section>
+
+<section class="ad-zone container">
+  <div class="ad-placeholder">Advertisement</div>
+</section>
+
+<section class="container previous-section">
+  <div class="matches-grid" id="matchesGrid">
+    <p class="loading-text">Loading matches...</p>
+  </div>
+</section>
+
+<section class="ad-zone container">
+  <div class="ad-placeholder">Advertisement</div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <a href="../index.html" class="logo">BOWLER<span>STATS</span></a>
+      <p>The only cricket site focused on bowlers.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Pages</h4>
+      <a href="matches.html">All Matches</a>
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy Policy</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 BowlerStats. For cricket fans who love bowler analysis.</p>
+  </div>
+</footer>
+
+<script>
+function formatDate(ds) {
+  return new Date(ds).toLocaleDateString('en-IN', { weekday:'short', year:'numeric', month:'short', day:'numeric' });
+}
+
+async function loadMatches() {
+  const grid = document.getElementById('matchesGrid');
+  try {
+    const res = await fetch('../data/matches-index.json');
+    const matches = await res.json();
+    if (!matches.length) { grid.innerHTML='<p class="loading-text">No matches added yet.</p>'; return; }
+    grid.innerHTML='';
+    matches.forEach(m => {
+      const card = document.createElement('a');
+      card.className='match-card';
+      card.href=`match.html?id=${m.matchId}`;
+      card.innerHTML=`
+        <div>
+          <div class="match-card-teams">${m.team1} VS ${m.team2}</div>
+          <div class="match-card-meta">📍 ${m.venue} &nbsp;|&nbsp; ${m.tournament}</div>
+        </div>
+        <div>
+          <div class="match-card-result">${m.result||'View Analysis'}</div>
+          <div class="match-card-date">${formatDate(m.date)}</div>
+        </div>`;
+      grid.appendChild(card);
+    });
+  } catch {
+    grid.innerHTML='<p class="loading-text">Could not load matches.</p>';
+  }
+}
+
+document.getElementById('menuToggle')?.addEventListener('click', () => {
+  document.getElementById('mainNav').classList.toggle('open');
+});
+
+loadMatches();
+</script>
+</body>
+</html>
